@@ -65,7 +65,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   const [textOnce, setTextOnce] = useState('');
   const [placeholder, setPlaceholder] = useState(oPlaceholder);
   const [inputType, setInputType] = useState(initialInputType || 'text');
-  const [isAccessoryOpen, setAccessoryOpen] = useState(false);
+  const [isAccessoryOpen, setAccessoryOpen] = useState(true);
   const [accessoryContent, setAccessoryContent] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null!);
   const focused = useRef(false);
@@ -221,7 +221,7 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
 
   const handleAccessoryBlur = useCallback(() => {
     setTimeout(() => {
-      setAccessoryOpen(false);
+      // setAccessoryOpen(false);
       setAccessoryContent('');
     });
   }, []);
