@@ -2,10 +2,10 @@ import React from 'react';
 
 export interface BubbleProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: string;
-  content?: string;
+  _content?: React.ReactNode;
 }
 
-export const Bubble = React.forwardRef<HTMLDivElement, any>((props, ref) => {
+export const Bubble = React.forwardRef<HTMLDivElement, BubbleProps>((props, ref) => {
   const { type = 'text', content, children, ...other } = props;
   return (
     <div className={`Bubble ${type}`} data-type={type} ref={ref} {...other}>
