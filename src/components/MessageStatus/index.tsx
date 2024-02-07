@@ -49,11 +49,9 @@ export const MessageStatus = ({
     if (status === 'pending') {
       doTimeout();
     } else if (status === 'sent') {
-      setType('sent');
+      setType('');
     } else if (status === 'fail') {
       setType('fail');
-    } else if (status === 'read') {
-      setType('read');
     }
 
     return clear;
@@ -76,22 +74,11 @@ export const MessageStatus = ({
   if (type) {
     return (
       <div className="MessageStatus" data-status={type}>
-        {switch (type) {
-          case 'fail':
-            return <IconButton icon="warning-circle-fill" onClick={handleRetry} />
-          
-          case 'read':
-            return <IconButton icon="check-circle-fill"/>
-            
-          case 'sent':
-            return <IconButton icon="check"/>
-
-          case 'spinner':
-            return <IconButton icon="check"/>
-        
-          default:
-            break;
-        }}
+        {type === 'fail' ? (
+          <IconButton icon="warning-circle-fill" onClick={handleRetry} />
+        ) : (
+          <Icon type="spinner" spin onClick={handleRetry} />
+        )}
       </div>
     );
   }
