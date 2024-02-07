@@ -4,7 +4,7 @@ import { IconButton } from '../IconButton';
 
 export type IMessageStatus = 'pending' | 'sent' | 'fail' | 'read';
 
-type StatusType = '' | 'loading' | 'fail';
+type StatusType = '' | 'loading' | 'sent' | 'fail' | 'read';
 
 export interface MessageStatusProps {
   status: IMessageStatus;
@@ -48,10 +48,13 @@ export const MessageStatus = ({
     clear();
     if (status === 'pending') {
       doTimeout();
+      setType('loading');
     } else if (status === 'sent') {
-      setType('');
+      setType('sent');
     } else if (status === 'fail') {
       setType('fail');
+    } else if (status === 'read') {
+      setType('read');
     }
 
     return clear;
@@ -71,17 +74,20 @@ export const MessageStatus = ({
     }
   }
 
-  if (type) {
-    return (
-      <div className="MessageStatus" data-status={type}>
-        {type === 'fail' ? (
-          <IconButton icon="warning-circle-fill" onClick={handleRetry} />
-        ) : (
-          <Icon type="spinner" spin onClick={handleRetry} />
-        )}
-      </div>
-    );
-  }
+  switch (type) {
+    case "fail":
+      return <IconButton icon="warning-circle-fill" onClick={handleRetry} />
+    
+    case "read":
+      return <IconButton icon="check" />
 
-  return null;
+    case "sent":
+      return <IconButton icon="check-circle-fill" />
+
+    case "loading":
+      return <Icon type="spinner" spin/>;
+
+    default:
+      return null;
+  }
 };
