@@ -140,8 +140,8 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
 
           reset();
 
-          if (res && res.noMore) {
-            setDisabled(true);
+          if (res) {
+            setDisabled(!!res?.noMore);
           }
         });
       } catch (ex) {

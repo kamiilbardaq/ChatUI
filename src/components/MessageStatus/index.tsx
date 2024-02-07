@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Icon } from '../Icon';
 import { IconButton } from '../IconButton';
 
-export type IMessageStatus = 'pending' | 'sent' | 'fail';
+export type IMessageStatus = 'pending' | 'sent' | 'fail' | 'read';
 
 type StatusType = '' | 'loading' | 'fail';
 
@@ -49,9 +49,11 @@ export const MessageStatus = ({
     if (status === 'pending') {
       doTimeout();
     } else if (status === 'sent') {
-      setType('');
+      setType('sent');
     } else if (status === 'fail') {
       setType('fail');
+    } else if (status === 'read') {
+      setType('read');
     }
 
     return clear;
@@ -74,11 +76,22 @@ export const MessageStatus = ({
   if (type) {
     return (
       <div className="MessageStatus" data-status={type}>
-        {type === 'fail' ? (
-          <IconButton icon="warning-circle-fill" onClick={handleRetry} />
-        ) : (
-          <Icon type="spinner" spin onClick={handleRetry} />
-        )}
+        {switch (type) {
+          case 'fail':
+            return <IconButton icon="warning-circle-fill" onClick={handleRetry} />
+          
+          case 'read':
+            return <IconButton icon="check-circle-fill"/>
+            
+          case 'sent':
+            return <IconButton icon="check"/>
+
+          case 'spinner':
+            return <IconButton icon="check"/>
+        
+          default:
+            break;
+        }}
       </div>
     );
   }

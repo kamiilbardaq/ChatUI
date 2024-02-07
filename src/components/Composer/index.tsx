@@ -216,13 +216,16 @@ export const Composer = React.forwardRef<ComposerHandle, ComposerProps>((props, 
   );
 
   const handleAccessoryToggle = useCallback(() => {
+    if(isAccessoryOpen) {
+      setAccessoryContent('');
+    }
     setAccessoryOpen(!isAccessoryOpen);
   }, [isAccessoryOpen]);
 
   const handleAccessoryBlur = useCallback(() => {
     setTimeout(() => {
       // setAccessoryOpen(false);
-      setAccessoryContent('');
+      // setAccessoryContent('');
     });
   }, []);
 
