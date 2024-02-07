@@ -239,7 +239,7 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
     );
 
     return (
-      <div className="PullToRefresh" ref={wrapperRef} onScroll={onScroll}>
+      <div className="PullToRefresh scrollbar" ref={wrapperRef} onScroll={onScroll}>
         <div className="PullToRefresh-inner">
           <div
             className={clsx('PullToRefresh-content', {
